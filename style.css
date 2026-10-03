@@ -1,0 +1,488 @@
+/*
+  Health Track: BMI and Calorie Companion
+  Styles complying with design constraints:
+  - Background: #FFC3B8
+  - Font: black, system font, base 20px, heading bold
+  - Danger: #A11900
+  - Success: #1DF037
+  - Primary: #125D80
+  - Spacing: padding 12px, gap 20px, radius 8px
+  - Grids 2-cols layout, max-width 1200px
+  - Responsive: Desktop col-3, Tablet col-2, Mobile col-1
+*/
+
+:root {
+  --bg-color: #FFC3B8;
+  --font-color: #000000;
+  --primary-color: #125D80;
+  --primary-hover: #0d4661;
+  --danger-color: #A11900;
+  --success-color: #1DF037;
+  --card-bg: #FFFFFF;
+  --card-bg-subtle: #FFF5F2;
+  --border-color: #125D80;
+  --border-light: #E0A69D;
+  --base-font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --radius: 8px;
+  --padding: 12px;
+  --gap: 20px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--font-color);
+  font-family: var(--base-font);
+  font-size: 20px;
+  line-height: 1.5;
+  min-height: 100vh;
+  padding: 24px 16px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header Section */
+.app-header {
+  text-align: center;
+  margin-bottom: var(--gap);
+  padding: var(--padding);
+  background-color: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px rgba(18, 93, 128, 0.12);
+}
+
+.app-header h1 {
+  font-size: 1.85em;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 6px;
+}
+
+.app-header p {
+  font-size: 0.95em;
+  color: var(--font-color);
+}
+
+/* Grid Layout */
+.track-grid {
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: 1fr;
+}
+
+/* Card Section Style */
+.card-section {
+  background-color: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: var(--padding);
+  box-shadow: 0 2px 8px rgba(18, 93, 128, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 12px;
+  border-bottom: 2px solid var(--border-light);
+  padding-bottom: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Forms & Inputs */
+.form-group {
+  margin-bottom: 14px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  font-size: 0.9em;
+  margin-bottom: 4px;
+  color: var(--font-color);
+}
+
+.input-control {
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.95em;
+  padding: var(--padding);
+  border: 2px solid #888888;
+  border-radius: var(--radius);
+  background-color: #FFFFFF;
+  color: var(--font-color);
+  transition: border-color 0.2s, outline 0.2s;
+}
+
+.input-control:focus {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 1px;
+  border-color: var(--primary-color);
+}
+
+.input-control.is-invalid {
+  border-color: var(--danger-color);
+}
+
+/* Error Messages */
+.error-text {
+  color: var(--danger-color);
+  font-size: 0.8em;
+  font-weight: bold;
+  margin-top: 4px;
+  min-height: 1.2em;
+  display: block;
+}
+
+/* Buttons */
+.btn {
+  font-family: inherit;
+  font-size: 0.95em;
+  font-weight: bold;
+  padding: var(--padding) 16px;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: #FFFFFF;
+  width: 100%;
+  margin-top: 6px;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+.btn-danger {
+  background-color: var(--danger-color);
+  color: #FFFFFF;
+}
+
+.btn-danger:hover {
+  background-color: #7d1300;
+}
+
+.btn-clear {
+  background-color: transparent;
+  color: var(--danger-color);
+  border: 2px solid var(--danger-color);
+  padding: 6px 14px;
+  font-size: 0.85em;
+}
+
+.btn-clear:hover {
+  background-color: var(--danger-color);
+  color: #FFFFFF;
+}
+
+.btn-delete-entry {
+  background-color: #FFF0ED;
+  color: var(--danger-color);
+  border: 1px solid var(--danger-color);
+  padding: 6px 12px;
+  font-size: 0.8em;
+}
+
+.btn-delete-entry:hover {
+  background-color: var(--danger-color);
+  color: #FFFFFF;
+}
+
+/* Results Display Box */
+.result-box {
+  margin-top: 14px;
+  padding: var(--padding);
+  background-color: var(--card-bg-subtle);
+  border: 2px dashed var(--border-color);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.result-label {
+  font-size: 0.85em;
+  color: #444444;
+  margin-bottom: 2px;
+}
+
+.result-value {
+  font-size: 1.15em;
+  font-weight: bold;
+  color: var(--primary-color);
+  word-break: break-word;
+}
+
+.result-badge {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 4px 12px;
+  font-size: 0.8em;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+.badge-normal {
+  background-color: #d1f7c4;
+  color: #126317;
+  border: 1px solid #1DF037;
+}
+
+.badge-warning {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeeba;
+}
+
+.badge-danger {
+  background-color: #f8d7da;
+  color: var(--danger-color);
+  border: 1px solid var(--danger-color);
+}
+
+/* Section Specific Placements */
+.tdee-section-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.tdee-card {
+  width: 100%;
+}
+
+/* Meal Suggestions */
+.meals-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 1fr;
+  margin-top: 8px;
+}
+
+.meal-card {
+  background-color: var(--card-bg-subtle);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: var(--padding);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.meal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 6px;
+  gap: 8px;
+}
+
+.meal-name {
+  font-weight: bold;
+  font-size: 0.95em;
+  color: var(--primary-color);
+}
+
+.meal-cal {
+  font-weight: bold;
+  font-size: 0.85em;
+  background-color: #e1f1f7;
+  color: var(--primary-color);
+  padding: 2px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.meal-desc {
+  font-size: 0.85em;
+  color: #333333;
+  margin-bottom: 8px;
+}
+
+.meal-macros {
+  font-size: 0.78em;
+  font-weight: bold;
+  color: #555555;
+  background-color: #FFFFFF;
+  padding: 6px;
+  border-radius: 4px;
+  border: 1px solid #E0A69D;
+}
+
+/* History Log Table & Cards */
+.history-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.history-item {
+  background-color: var(--card-bg-subtle);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 10px var(--padding);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.history-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  font-size: 0.85em;
+}
+
+.history-date {
+  color: #555555;
+  font-size: 0.8em;
+  font-weight: normal;
+}
+
+.history-stat {
+  font-weight: bold;
+  color: var(--font-color);
+}
+
+.history-stat span {
+  color: var(--primary-color);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 24px var(--padding);
+  color: #666666;
+  font-style: italic;
+  font-size: 0.95em;
+}
+
+/* Quick toast notification */
+.toast-msg {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: var(--primary-color);
+  color: #FFFFFF;
+  padding: 12px 20px;
+  border-radius: var(--radius);
+  font-size: 0.9em;
+  font-weight: bold;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+  z-index: 999;
+}
+
+.toast-msg.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive Media Queries */
+/* Tablet: 2 columns */
+@media (min-width: 768px) {
+  .track-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* TDEE below BMI and BMR in center */
+  .section-tdee {
+    grid-column: 1 / -1;
+    max-width: 620px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .section-calorie {
+    grid-column: 1 / 2;
+  }
+
+  .section-meals {
+    grid-column: 2 / 3;
+  }
+
+  .section-history {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Desktop: 3 columns */
+@media (min-width: 1024px) {
+  .track-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Row 1: BMI and BMR side by side */
+  .section-bmi {
+    grid-column: 1 / 2;
+  }
+
+  .section-bmr {
+    grid-column: 2 / 3;
+  }
+
+  /* TDEE on row 1 col 3 or below BMI/BMR centered */
+  .section-tdee {
+    grid-column: 3 / 4;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .section-calorie {
+    grid-column: 1 / 2;
+  }
+
+  .section-meals {
+    grid-column: 2 / 4;
+  }
+
+  .meals-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .section-history {
+    grid-column: 1 / -1;
+  }
+}
